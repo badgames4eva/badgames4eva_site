@@ -1,8 +1,8 @@
 # badgames4eva.com — publisher landing page
 
 The apex-domain site: one page listing the games, plus the two ad-authorization files
-that have to live at a domain root. Deployed by **Cloudflare Pages** from this repo's
-`main` branch — **pushing to `main` is the deploy.**
+that have to live at a domain root. Deployed by **Cloudflare** from this repo's `main`
+branch via Cloudflare's Git integration — **pushing to `main` is the deploy.**
 
 Live: <https://badgames4eva.com/>
 
@@ -29,29 +29,44 @@ And a landing page is the right thing to put there anyway: each game lives on it
 | `.gitignore` | Copied from `words_on_demand` so the two repos behave the same. |
 
 There is deliberately **no `CNAME` file**. That's a GitHub Pages mechanism; Cloudflare
-Pages ignores it and takes its custom domains from the project settings instead. (The
-`words_on_demand` repo still has one for historical reasons — it's inert there too.)
+ignores it and takes its custom domains from the dashboard instead. (The `words_on_demand`
+repo still has one for historical reasons — it's inert there too, now that Cloudflare
+serves that domain.)
 
-## Cloudflare Pages setup
+## Cloudflare setup
 
-Connected via **Workers & Pages → Create → Pages → Connect to Git**. Build settings, since
-this is plain static files:
+Connected via **Workers & Pages → Create → Connect to Git**. The deploy serves the repo's
+files as static assets straight from `main` — no framework, no build command, output at
+the repo root. (You can tell it's Cloudflare's static-asset serving and not GitHub Pages:
+a 404 returns a **zero-byte** body and every response carries `server: cloudflare`, where
+GitHub Pages returns a styled HTML 404.)
 
-| Setting | Value |
+The custom domains — `badgames4eva.com` and `www.badgames4eva.com` — are attached in the
+Cloudflare dashboard. Because the zone is in the same Cloudflare account, Cloudflare
+creates the proxied DNS records itself (flattened at the apex) and issues the certificate:
+no manual A/AAAA records, and TLS terminates at the edge.
+
+### The `www` → apex redirect
+
+`www.badgames4eva.com` is a **301 redirect** to the apex, done with a Cloudflare **Single
+Redirect** rule (Rules → Redirect Rules), *not* a second origin:
+
+| Field | Value |
 |---|---|
-| Framework preset | **None** |
-| Build command | *(empty)* |
-| Build output directory | `/` |
-| Root directory | `/` |
+| Mode | Wildcard pattern |
+| Request URL | `https://www.*` |
+| Target URL | `https://${1}` |
+| Status | 301 |
+| Preserve query string | ✔ |
 
-Then **Custom domains → Set up a domain**, once for `badgames4eva.com` and once for
-`www.badgames4eva.com`. Because the zone is in the same Cloudflare account, Cloudflare
-creates the DNS record itself (a proxied record, flattened at the apex) and issues the
-certificate — no manual A/AAAA records to add, and no grey-cloud dance, because Cloudflare
-Pages terminates TLS at the edge by design.
+The `https://` scheme in the target is load-bearing: a scheme-less target like
+`badgames4eva.com` is read as a *relative path*, leaving the browser on `www` (which has
+no origin behind it) and producing a **522**. Verify from outside any browser cache:
 
-Unlike GitHub Pages, a Cloudflare Pages project accepts **several** custom domains, so the
-apex and `www` both attach to this one project.
+```bash
+curl -sI https://www.badgames4eva.com/app-ads.txt?x=1 | grep -iE '^(HTTP|location)'
+# HTTP/2 301 ; location: https://badgames4eva.com/app-ads.txt?x=1
+```
 
 ## Adding a game
 

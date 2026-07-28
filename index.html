@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>badgames4eva — games for the TV</title>
+  <meta name="description" content="badgames4eva makes small, ad-supported games for televisions and streaming devices." />
+
+  <!-- AdSense site-ownership verification. This is WHY this site exists at the apex:
+       AdSense verifies the REGISTRABLE domain (badgames4eva.com) and its crawler wants
+       the tag served from that exact host. A redirect to a subdomain does not satisfy
+       it, and Pages allows only one custom domain per repo — so the apex needs its own
+       repo, which is this one.
+       Publisher ca-pub-5597688543726963. Not a secret; it's designed to be public
+       markup. Keep it permanently — AdSense re-checks, and removing it disables the
+       site entry. The same tag is on both pages of the words_on_demand repo.
+       See ADS_SETUP.md there for the full rationale. -->
+  <meta name="google-adsense-account" content="ca-pub-5597688543726963">
+
+  <!-- Deliberately one self-contained file: no stylesheet, no script, no build step,
+       matching the house style of the game repos. This page's whole job is to be a
+       valid crawlable developer website (AdSense, Ad Manager, both app stores ask for
+       one) and an index of the games. Anything it doesn't have can't rot. -->
+  <style>
+    :root { --ink: #14172a; --muted: #5b6480; --accent: #2f5fd0; --line: #e3e7ef; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0 auto; padding: 4rem 1.5rem 5rem; max-width: 46rem;
+      font: 16px/1.65 -apple-system, "Segoe UI", system-ui, sans-serif;
+      color: var(--ink); background: #fff;
+      -webkit-text-size-adjust: 100%;
+    }
+    h1 { font-size: 2rem; line-height: 1.15; margin: 0 0 .25rem; letter-spacing: -.02em; }
+    .tagline { color: var(--muted); margin: 0 0 3rem; }
+    h2 { font-size: 1.05rem; text-transform: uppercase; letter-spacing: .06em;
+      color: var(--muted); margin: 3rem 0 1rem; }
+    a { color: var(--accent); }
+
+    /* One tile per game. auto-fit means the grid reflows on its own as games are
+       added — 1 across on a phone, 2+ on a desktop — with no breakpoint to maintain. */
+    .games { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+
+    /* The whole tile is the link, so the tap target is the card, not the title. */
+    .game {
+      display: block; text-decoration: none; color: inherit;
+      border: 1px solid var(--line); border-radius: 12px; padding: 1.3rem 1.4rem;
+      transition: border-color .15s, transform .15s;
+    }
+    .game:hover, .game:focus-visible { border-color: var(--accent); transform: translateY(-2px); }
+    .game:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .game-name { font-size: 1.2rem; font-weight: 600; margin: 0 0 .3rem; }
+    .game-blurb { color: var(--muted); margin: 0 0 .9rem; font-size: .95rem; }
+    .game-meta { font-size: .85rem; color: var(--muted); }
+    .game-cta { color: var(--accent); font-weight: 600; font-size: .95rem; }
+
+    /* Per-game secondary links (privacy, etc). Outside the tile: the tile is one
+       link, and a link inside a link is invalid HTML. */
+    .game-links { font-size: .85rem; margin: .5rem 0 0; }
+
+    dl { margin: 0; }
+    dt { font-weight: 600; margin-top: 1rem; }
+    dd { margin: 0; color: var(--muted); }
+    footer { color: var(--muted); font-size: .9rem; margin-top: 4rem;
+      border-top: 1px solid var(--line); padding-top: 1.5rem; }
+  </style>
+</head>
+<body>
+  <h1>badgames4eva</h1>
+  <p class="tagline">Small games for the biggest screen in the house.</p>
+
+  <h2>Games</h2>
+
+  <!-- ADDING A GAME: copy one <a class="game"> block, then add its privacy link to
+       the .game-links paragraph below it. Each game lives in its own repo on its own
+       subdomain (gamename.badgames4eva.com) — GitHub Pages allows one custom domain
+       per repo, so that split is required, not a preference. Nothing here needs to
+       change when a game ships an update; this page only holds names and links. -->
+  <div class="games">
+    <a class="game" href="https://wordsondemand.badgames4eva.com/">
+      <p class="game-name">Words on Demand</p>
+      <p class="game-blurb">A fresh five-letter word puzzle every day, built for a TV
+        remote — four-way D-pad and OK, nothing else.</p>
+      <p class="game-meta">Free · ad-supported · Fire TV &amp; Android TV</p>
+      <p class="game-cta">Play in your browser →</p>
+    </a>
+  </div>
+  <p class="game-links">
+    Words on Demand:
+    <a href="https://wordsondemand.badgames4eva.com/privacy">privacy policy</a>
+  </p>
+
+  <h2>About</h2>
+  <p>badgames4eva builds small, free games for televisions and streaming devices. No
+    accounts, no sign-in, no backend — your progress stays on your own device. The games
+    are paid for by ads, and those ads are <strong>non-personalized</strong>.</p>
+
+  <h2>Contact</h2>
+  <dl>
+    <dt>Support &amp; privacy</dt>
+    <dd><a href="mailto:badgameseva@gmail.com">badgameseva@gmail.com</a></dd>
+    <dt>Publisher</dt>
+    <dd>badgames4eva</dd>
+  </dl>
+
+  <footer>
+    <p>© 2026 badgames4eva ·
+      <a href="mailto:badgameseva@gmail.com">badgameseva@gmail.com</a></p>
+  </footer>
+</body>
+</html>

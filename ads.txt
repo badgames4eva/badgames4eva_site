@@ -1,0 +1,18 @@
+# ads.txt — authorized sellers for the badgames4eva WEB properties.
+#
+# Same content as app-ads.txt, different consumer: ads.txt covers websites, app-ads.txt
+# covers apps. The IAB spec requires this file at the root of the domain serving the
+# pages, so it lives here (https://badgames4eva.com/ads.txt) rather than in a game repo.
+#
+# NOTE ON SUBDOMAINS: crawlers resolve ads.txt against the page's own host, so a game on
+# gamename.badgames4eva.com is checked at gamename.badgames4eva.com/ads.txt, NOT here.
+# The root file can delegate with a SUBDOMAIN= directive if a game site ever monetizes
+# its web build; today the web builds serve no ads (CONFIG.vastTags is null), so there is
+# nothing to declare and no delegation line.
+#
+# Format: <ad system domain>, <publisher id>, <DIRECT|RESELLER>, <certification id>
+google.com, pub-5597688543726963, DIRECT, f08c47fec0942fa0
+
+# TODO once the Google Ad Manager network exists: add the network-code line GAM gives you
+# under Admin -> Global settings, in addition to the line above. See ADS_SETUP.md in the
+# words_on_demand repo.

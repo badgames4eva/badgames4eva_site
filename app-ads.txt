@@ -1,0 +1,21 @@
+# app-ads.txt — authorized sellers for badgames4eva's apps.
+#
+# WHY IT LIVES HERE AND NOT IN A GAME'S REPO: the IAB spec says buyers look for this
+# file at the ROOT of the developer website declared in the app store listing, i.e.
+# https://badgames4eva.com/app-ads.txt. Not a subdomain, not a path. So the store
+# listings must name badgames4eva.com as the developer website, and this one file
+# covers every game — it is per-publisher, not per-app.
+#
+# Format: <ad system domain>, <publisher id>, <DIRECT|RESELLER>, <certification id>
+#
+# The line below authorizes Google to sell inventory on our behalf under the AdSense
+# publisher ID that Ad Manager pays out to. f08c47fec0942fa0 is Google's own TAG
+# certification ID and is the same for every publisher.
+google.com, pub-5597688543726963, DIRECT, f08c47fec0942fa0
+
+# TODO once the Google Ad Manager network exists: GAM shows the exact line to add
+# under Admin -> Global settings, keyed on the NETWORK CODE rather than the AdSense
+# pub ID. Add it, don't replace the line above — both are expected to be present.
+# Until then this file is harmless: with CONFIG.vastTags still null the apps request
+# no ads at all, and an app-ads.txt that under-declares only ever costs fill, never
+# compliance. See ADS_SETUP.md in the words_on_demand repo.

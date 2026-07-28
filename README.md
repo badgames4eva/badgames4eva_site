@@ -68,6 +68,17 @@ curl -sI https://www.badgames4eva.com/app-ads.txt?x=1 | grep -iE '^(HTTP|locatio
 # HTTP/2 301 ; location: https://badgames4eva.com/app-ads.txt?x=1
 ```
 
+## Games listed here
+
+| Game | Subdomain | Privacy page |
+|---|---|---|
+| Words on Demand | `wordsondemand.badgames4eva.com` | ✔ `/privacy` |
+| Solitaire on Demand | `solitaireondemand.badgames4eva.com` | ✘ **none yet** — not linked rather than link a 404 |
+
+Solitaire needs a privacy page before it goes to either store (both require a reachable
+policy URL) — it stores game state and stats locally, so it has something to disclose.
+Add the link to `.game-links` once it exists.
+
 ## Adding a game
 
 1. Copy one `<a class="game">` block in `index.html`; edit the name, blurb, meta line, and

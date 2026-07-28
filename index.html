@@ -9,8 +9,8 @@
   <!-- AdSense site-ownership verification. This is WHY this site exists at the apex:
        AdSense verifies the REGISTRABLE domain (badgames4eva.com) and its crawler wants
        the tag served from that exact host. A redirect to a subdomain does not satisfy
-       it, and Pages allows only one custom domain per repo — so the apex needs its own
-       repo, which is this one.
+       it, and the apex also has to serve ads.txt/app-ads.txt at its root — so the apex
+       needs its own site, which is this one.
        Publisher ca-pub-5597688543726963. Not a secret; it's designed to be public
        markup. Keep it permanently — AdSense re-checks, and removing it disables the
        site entry. The same tag is on both pages of the words_on_demand repo.
@@ -72,9 +72,9 @@
 
   <!-- ADDING A GAME: copy one <a class="game"> block, then add its privacy link to
        the .game-links paragraph below it. Each game lives in its own repo on its own
-       subdomain (gamename.badgames4eva.com) — GitHub Pages allows one custom domain
-       per repo, so that split is required, not a preference. Nothing here needs to
-       change when a game ships an update; this page only holds names and links. -->
+       subdomain (gamename.badgames4eva.com), each its own Cloudflare deploy. Nothing
+       here needs to change when a game ships an update; this page only holds names
+       and links. -->
   <div class="games">
     <a class="game" href="https://wordsondemand.badgames4eva.com/">
       <p class="game-name">Words on Demand</p>
@@ -83,10 +83,23 @@
       <p class="game-meta">Free · ad-supported · Fire TV &amp; Android TV</p>
       <p class="game-cta">Play in your browser →</p>
     </a>
+
+    <a class="game" href="https://solitaireondemand.badgames4eva.com/">
+      <p class="game-name">Solitaire on Demand</p>
+      <p class="game-blurb">Classic Klondike built for a TV remote, with three difficulty
+        levels, smart hints, and guaranteed-winnable deals on Easy.</p>
+      <p class="game-meta">Free · Fire TV &amp; Android TV · plays offline</p>
+      <p class="game-cta">Play in your browser →</p>
+    </a>
   </div>
   <p class="game-links">
     Words on Demand:
     <a href="https://wordsondemand.badgames4eva.com/privacy">privacy policy</a>
+    <!-- Solitaire on Demand has NO privacy page yet — its repo has no privacy.html and
+         no policy text anywhere. Deliberately not linked rather than pointing at a 404.
+         It needs one before that game is submitted to either store (both require a
+         reachable privacy-policy URL), and it also stores data locally (game state,
+         stats) so it has something to disclose. Add the link here once it exists. -->
   </p>
 
   <h2>About</h2>

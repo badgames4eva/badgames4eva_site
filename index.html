@@ -17,10 +17,20 @@
        See ADS_SETUP.md there for the full rationale. -->
   <meta name="google-adsense-account" content="ca-pub-5597688543726963">
 
-  <!-- Deliberately one self-contained file: no stylesheet, no script, no build step,
-       matching the house style of the game repos. This page's whole job is to be a
-       valid crawlable developer website (AdSense, Ad Manager, both app stores ask for
-       one) and an index of the games. Anything it doesn't have can't rot. -->
+  <!-- AdSense Auto ads loader. The meta tag above proves ownership; this script is what
+       actually lets Google place ads on the page, so both are needed. Same publisher ID.
+       Google's instruction is to put it in <head> on EVERY page of the site — this site
+       has exactly one page, so this is every page. Add it to any new page too.
+       async + crossorigin are Google's, not optional decoration: drop them and the tag
+       stops matching what AdSense expects to find. -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5597688543726963"
+     crossorigin="anonymous"></script>
+
+  <!-- Deliberately one self-contained file: no stylesheet, no build step, and no script
+       of our own (the AdSense loader above is Google's, served from their CDN), matching
+       the house style of the game repos. This page's whole job is to be a valid crawlable
+       developer website (AdSense, Ad Manager, both app stores ask for one) and an index
+       of the games. Anything it doesn't have can't rot. -->
   <style>
     :root { --ink: #14172a; --muted: #5b6480; --accent: #2f5fd0; --line: #e3e7ef; }
     * { box-sizing: border-box; }

@@ -19,11 +19,25 @@ wouldn't have worked:
 And a landing page is the right thing to put there anyway: each game lives on its own
 `gamename.badgames4eva.com`, and this page is the index over them.
 
+## AdSense on this page
+
+`index.html`'s `<head>` carries **two** AdSense things, and they do different jobs — keep
+both:
+
+1. `<meta name="google-adsense-account" content="ca-pub-5597688543726963">` — proves
+   ownership of the domain to AdSense's crawler.
+2. The `adsbygoogle.js` loader `<script>` — what actually lets Google place Auto ads.
+   Google's instruction is to put it in `<head>` on **every page**; this site has one page,
+   so that's this one. Add it to any page you add.
+
+Keep `async` and `crossorigin="anonymous"` exactly as Google gives them. Neither the
+publisher ID nor the script tag is a secret — it's public markup by design.
+
 ## Files
 
 | File | What it is |
 |---|---|
-| `index.html` | The whole site. One self-contained file: no stylesheet, no script, no build step — same house style as the game repos. |
+| `index.html` | The whole site. One self-contained file: no stylesheet, no build step, no script of our own — same house style as the game repos. It does load Google's AdSense script (see below). |
 | `app-ads.txt` | Authorized sellers for the **apps**. Per-publisher, so one file covers every game, forever. |
 | `ads.txt` | Authorized sellers for **web** pages on this host. |
 | `.gitignore` | Copied from `words_on_demand` so the two repos behave the same. |
@@ -104,7 +118,8 @@ game subdomain means it's never found and programmatic demand suffers. The
 
 ```bash
 curl -sI https://badgames4eva.com/ | head -1                   # 200
-curl -s https://badgames4eva.com/ | grep -c google-adsense      # 1
+curl -s https://badgames4eva.com/ | grep -c google-adsense      # 1 (ownership meta tag)
+curl -s https://badgames4eva.com/ | grep -c adsbygoogle.js      # 1 (Auto ads loader)
 curl -s https://badgames4eva.com/app-ads.txt | grep -v '^#'     # the DIRECT line
 curl -sI https://www.badgames4eva.com/ | head -1                # 200 too
 ```
